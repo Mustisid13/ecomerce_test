@@ -95,7 +95,7 @@ enabled:enabled,
                     borderRadius: BorderRadius.circular(10)),
                 child: AppTextWidget(
                   txtTitle: labelText,
-                  txtColor: AppColors.charcoalBlack,
+                  txtColor: AppColors.tileBlack,
                   fontSize: 24,
                   fontWeight: FontWeight.w600,
                 ),

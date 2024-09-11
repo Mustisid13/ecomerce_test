@@ -16,7 +16,7 @@ Future<void> showToast({required String? title, bool isError = false}) async {
       style: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w500,
-          color: isError ? AppColors.white : AppColors.charcoalBlack),
+          color: isError ? AppColors.white : AppColors.tileBlack),
     ),
     // you can also use RichText widget for title and description parameters
     // description: RichText(

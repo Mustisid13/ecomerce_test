@@ -1,13 +1,15 @@
-import 'package:dio/dio.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:dio/dio.dart';
 
 class DioService {
-  final Dio _dio;
-  final Connectivity _connectivity;
+  late final Dio _dio;
+ late final Connectivity _connectivity;
 
-  DioService()
-      : _dio = Dio(),
+  DioService(){
+     _dio = Dio();
+     _dio.options = BaseOptions(baseUrl: "https://fakestoreapi.com");
         _connectivity = Connectivity();
+  }
 
   Future<Response> get(String url,
       {Map<String, dynamic>? queryParameters, Options? options}) async {

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../styles/AppColors.dart';
 
@@ -7,11 +8,11 @@ class AppTextWidget extends StatelessWidget {
   const AppTextWidget({
     super.key,
     this.txtTitle = "",
-    this.txtColor = AppColors.primaryColor,
-    this.fontWeight = FontWeight.w600,
+    this.txtColor = AppColors.white,
+    this.fontWeight = FontWeight.w400,
     this.fontStyle = FontStyle.normal,
     this.fontSize = 14,
-    this.maxLine = 5,
+    this.maxLine,
     this.textAlign = TextAlign.left,
     this.overflow = TextOverflow.ellipsis,
     this.decoration = TextDecoration.none,
@@ -26,7 +27,7 @@ class AppTextWidget extends StatelessWidget {
   // String fontFamily = AppTheme.robotoRegular,
   final FontStyle fontStyle;
   final double fontSize;
-  final int maxLine;
+  final int? maxLine;
   final TextAlign textAlign;
   final TextOverflow overflow;
   final TextDecoration decoration;
@@ -45,7 +46,7 @@ class AppTextWidget extends StatelessWidget {
         height: height == null? 1: height!/fontSize,
         fontWeight: fontWeight,
         fontStyle: fontStyle,
-        fontSize: fontSize,
+        fontSize: fontSize.sp,
         decoration: decoration,
         decorationColor: txtColor,
         fontFamily: fontFamily,

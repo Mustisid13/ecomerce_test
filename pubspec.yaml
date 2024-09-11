@@ -36,6 +36,8 @@ dependencies:
   hive: ^2.2.3
   get: ^5.0.0-release-candidate-9.2
   connectivity_plus: ^6.0.5
+  cached_network_image: ^3.4.1
+  rating_bar_flutter: ^1.0.2
 
 dev_dependencies:
   flutter_test:

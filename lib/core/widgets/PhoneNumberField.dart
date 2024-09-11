@@ -73,7 +73,7 @@ class Phonenumberfield extends HookWidget {
             alignment: Alignment.center,
             decoration: const BoxDecoration(
                 border:
-                    Border(right: BorderSide(color: AppColors.charcoalBlack))),
+                    Border(right: BorderSide(color: AppColors.tileBlack))),
             child: AppTextWidget(
               txtTitle: code.value,
               fontSize: 18,

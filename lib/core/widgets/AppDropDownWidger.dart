@@ -56,7 +56,7 @@ class AppDropDownWidget extends StatelessWidget {
             angle: -1.5707,
             child: const Icon(
               Icons.arrow_back_ios_new,
-              color: AppColors.charcoalBlack,
+              color: AppColors.tileBlack,
             )),
       )),
       menuItemStyleData: const MenuItemStyleData(

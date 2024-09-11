@@ -3,7 +3,7 @@ import 'package:ecomerce_test/core/services/network/dio_service.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 
-class Global extends Binding {
+class GlobalBinding extends Binding {
   @override
   List<Bind> dependencies() {
     return [

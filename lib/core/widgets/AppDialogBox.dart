@@ -22,7 +22,7 @@ class AppDialogBox extends StatelessWidget {
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
       child: Dialog(
-        backgroundColor: AppColors.charcoalBlack,
+        backgroundColor: AppColors.tileBlack,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Padding(
           padding:
@@ -45,7 +45,7 @@ class AppDialogBox extends StatelessWidget {
                     onPressed: onCancel,
                     btnColor: AppColors.secondaryColor,
                     btnName: "CANCEL",
-                    txtColor: AppColors.charcoalBlack,
+                    txtColor: AppColors.tileBlack,
                   ),
 // const Gap(15),
                   AppButtonWidget(
@@ -57,7 +57,7 @@ class AppDialogBox extends StatelessWidget {
                     width: 100,
                     btnColor: AppColors.secondaryColor,
                     btnName: actionName ?? "YES",
-                    txtColor: actionColor ?? AppColors.charcoalBlack,
+                    txtColor: actionColor ?? AppColors.tileBlack,
                   ),
                 ],
               )

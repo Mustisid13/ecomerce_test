@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+
 import '../styles/AppColors.dart';
 
 class IconContainer extends StatelessWidget {
   const IconContainer({super.key, this.height=40, 
   this.iconSize=20,
-  this.iconColor= AppColors.primaryColor,
+  this.iconColor= AppColors.black,
   required this.icon,  this.bgColor= AppColors.white, this.boxShadow,this.margin});
 final double height;
 final double iconSize;
