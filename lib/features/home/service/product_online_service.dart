@@ -2,20 +2,31 @@ import 'dart:developer';
 
 import 'package:ecomerce_test/core/services/network/dio_service.dart';
 import 'package:ecomerce_test/features/home/models/ProductListResponseModel.dart';
-import 'package:ecomerce_test/features/home/service/product_service.dart';
+import 'package:ecomerce_test/features/home/service/products_offline_service.dart';
 
-class ProductOnlineService implements ProductService {
+class ProductOnlineService {
   late final DioService _dioService;
-  ProductOnlineService({required DioService dioService}) : _dioService = dioService;
+  late final ProductsOfflineService _productsOfflineService;
+  ProductOnlineService(
+      {required DioService dioService,
+      required ProductsOfflineService productsOfflineService})
+      : _dioService = dioService,
+        _productsOfflineService = productsOfflineService;
 
-  @override
+  // Product Methods
+  /// fetchCategories() method fetches product list from local if available or else fetches from server
   Future<List<ProductDataModel>> fetchProducts() async {
     try {
       List<ProductDataModel> data = [];
-      final result = await _dioService.get("/products");
-      if ((result.statusCode ?? 0) < 300) {
-        data.addAll((result.data as List<dynamic>)
-            .map((e) => ProductDataModel.fromJson(e)));
+      // fetch from local
+      data = await _productsOfflineService.fetchProducts();
+      if (data.isEmpty) {
+        final result = await _dioService.get("/products");
+        if ((result.statusCode ?? 0) < 300) {
+          data.addAll((result.data as List<dynamic>)
+              .map((e) => ProductDataModel.fromJson(e)));
+          await _productsOfflineService.storeProducts(data);
+        }
       }
       return data;
     } catch (err) {
@@ -24,48 +35,41 @@ class ProductOnlineService implements ProductService {
     }
   }
 
-  @override
-  Future<ProductDataModel?> fetchProductDetails(int id) async {
+  Future<List<ProductDataModel>> fetchCategoryProducts(String category) async {
     try {
-      ProductDataModel? data;
-      final result = await _dioService.get("/products/$id");
-      if ((result.statusCode ?? 0) < 300) {
-        data = ProductDataModel.fromJson(result.data);
+      List<ProductDataModel> data = [];
+      data = await _productsOfflineService.fetchCategoryProducts(category);
+      if (data.isEmpty) {
+        final result = await _dioService.get("/products/category/$category");
+        if ((result.statusCode ?? 0) < 300) {
+          data.addAll((result.data as List<dynamic>)
+              .map((e) => ProductDataModel.fromJson(e)));
+        }
       }
       return data;
     } catch (err) {
-      log("", error: err.toString(), name: "fetchProductDetails()");
-      return null;
+      log("", error: err.toString(), name: "fetchProducts()");
+      return [];
     }
   }
 
-  @override
+  // Category Products
+
+  /// fetchCategories() method fetched category list from local if available or else fetches from server
   Future<List<String>> fetchCategories() async {
     try {
       List<String> data = [];
-      final result = await _dioService.get("/products/categories");
-      if ((result.statusCode ?? 0) < 300) {
-        data = (result.data as List).cast<String>();
+      data = await _productsOfflineService.fetchCategories();
+      if (data.isEmpty) {
+        final result = await _dioService.get("/products/categories");
+        if ((result.statusCode ?? 0) < 300) {
+          data = (result.data as List).cast<String>();
+          await _productsOfflineService.storeCategory(data);
+        }
       }
       return data;
     } catch (err) {
       log("", error: err.toString(), name: "fetchCategories()");
-      return [];
-    }
-  }
-
-  @override
-  Future<List<ProductDataModel>> fetchCategoryProducts(String category) async {
-    try {
-      List<ProductDataModel> data = [];
-      final result = await _dioService.get("/products/category/$category");
-      if ((result.statusCode ?? 0) < 300) {
-        data.addAll((result.data as List<dynamic>)
-            .map((e) => ProductDataModel.fromJson(e)));
-      }
-      return data;
-    } catch (err) {
-      log("", error: err.toString(), name: "fetchProducts()");
       return [];
     }
   }

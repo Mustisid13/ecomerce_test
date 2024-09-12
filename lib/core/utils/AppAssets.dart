@@ -4,10 +4,7 @@ class AppAssets{
 
   // lottie
   
-  static const String noGroups = "$_lottie/no_group.json";
-  static const String noContacts = "$_lottie/no_contacts.json";
-  static const String errorLottie = "$_lottie/error_lottie.json";
-  
-  // images
-  static const String logo = "$_images/logo.png";
+  static const String emptyCart = "$_lottie/empty_cart.json";
+  static const String loader = "$_lottie/loader.json";
+  static const String success = "$_lottie/success.json";
 }

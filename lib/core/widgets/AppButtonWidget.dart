@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'AppTextWidget.dart';
 
 import '../styles/AppColors.dart';
+import 'AppTextWidget.dart';
 
 class AppButtonWidget extends StatelessWidget {
   const AppButtonWidget({
@@ -48,7 +48,7 @@ class AppButtonWidget extends StatelessWidget {
           alignment: Alignment.center,
           height: height,
           width: width,
-          padding: padding,
+          padding: padding??const EdgeInsets.symmetric(horizontal: 20,vertical: 15),
           decoration: BoxDecoration(
               border: border,
               color: btnColor,

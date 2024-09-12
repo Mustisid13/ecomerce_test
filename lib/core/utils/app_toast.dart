@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
 
 import '../styles/AppColors.dart';
-import 'AppAssets.dart';
 
 Future<void> showToast({required String? title, bool isError = false}) async {
   toastification.dismissAll(delayForAnimation: false);
@@ -30,11 +29,8 @@ Future<void> showToast({required String? title, bool isError = false}) async {
         child: child,
       );
     },
-    icon: const CircleAvatar(
-      backgroundImage: AssetImage(AppAssets.logo),
-    ),
 
-    showIcon: true, // show or hide the icon
+    showIcon: false,
     primaryColor: isError
         ? AppColors.errorColor.withOpacity(0.5)
         : AppColors.secondaryColor,

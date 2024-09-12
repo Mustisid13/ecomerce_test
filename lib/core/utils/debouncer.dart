@@ -10,7 +10,7 @@ static final internal = Debouncer._internal();
 
   void run(VoidCallback action) {
     _timer?.cancel(); // Cancel any pending timers.
-    _timer = Timer(const Duration(milliseconds: 500), action);
+    _timer = Timer(const Duration(milliseconds: 300), action);
   }
 
   void cancel() {

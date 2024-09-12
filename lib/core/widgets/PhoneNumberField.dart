@@ -19,10 +19,10 @@ class Phonenumberfield extends HookWidget {
       this.verified = false,
       this.otpButtonLoading = false,
       this.onChanged,
-      required this.onCodeChange});
+       this.onCodeChange});
   final TextEditingController controller;
   final String? Function(String) validator;
-  final void Function(String) onCodeChange;
+  final void Function(String)? onCodeChange;
   final bool showSendOtp;
   final bool otpButtonLoading;
   final FutureOr<bool> Function()? onSendOtp;
@@ -63,7 +63,7 @@ class Phonenumberfield extends HookWidget {
                   true, // optional. Shows phone code before the country name.
               onSelect: (Country country) {
                 code.value = "+${country.phoneCode}";
-                onCodeChange(code.value);
+                onCodeChange?.call(code.value);
               },
             );
           },
