@@ -31,15 +31,17 @@ class CartController extends BaseController {
   }
 
   Future<void> addProductToCart(ProductDataModel product,
-      {int count = 1,bool replaceCount = false}) async {
+      {int count = 1, bool replaceCount = false}) async {
     setLoading();
     // check if product exist in cart or not
     final productIndex = cartProducts.value
         .indexWhere((p) => p.productDataModel?.id == product.id);
     // if index is -1 product is not in the cart
     if (productIndex != -1) {
-      cartProducts[productIndex] = cartProducts[productIndex]
-          .copyWith(count: replaceCount? count: (cartProducts[productIndex].count ?? 0) + count);
+      cartProducts[productIndex] = cartProducts[productIndex].copyWith(
+          count: replaceCount
+              ? count
+              : (cartProducts[productIndex].count ?? 0) + count);
     } else {
       // adding product to cart
       cartProducts

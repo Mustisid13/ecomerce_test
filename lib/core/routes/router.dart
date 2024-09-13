@@ -9,34 +9,26 @@ import '../../features/home/home_bidings.dart';
 import '../../features/home/presentation/screens/home_page.dart';
 
 class AppRoutes {
-
-
   static final routes = [
-
     GetPage(
-      name: RouteNames.home,
-      
-      page: () => const HomePage(),
-      bindings: [HomeBidings(),CartBinding()]
-    ),
+        name: RouteNames.home,
+        transition: Transition.fade,
+        page: () => const HomePage(),
+        bindings: [HomeBidings(), CartBinding()]),
     GetPage(
-      name: RouteNames.cart,
-      page: () => const CartPage(),
-      binding: CartBinding()
-      
-    ),
+        transition: Transition.fade,
+        name: RouteNames.cart,
+        page: () => const CartPage(),
+        binding: CartBinding()),
     GetPage(
-      name: RouteNames.checkOut,
-      page: () => const CheckoutPage(),
-      binding: CartBinding()
-      
-    ),
+        transition: Transition.fade,
+        name: RouteNames.checkOut,
+        page: () => const CheckoutPage(),
+        binding: CartBinding()),
     GetPage(
-      name: RouteNames.productDetailPage,
-      page: () => const ProductDetailPage(),
-      bindings: [HomeBidings(), CartBinding()]
-    ),
+        transition: Transition.fade,
+        name: RouteNames.productDetailPage,
+        page: () => const ProductDetailPage(),
+        bindings: [HomeBidings(), CartBinding()]),
   ];
 }
-
-

@@ -9,14 +9,14 @@ import 'package:get/get.dart';
 import 'package:rating_bar_flutter/rating_bar_flutter.dart';
 
 class ProductTile extends GetView<ProductController> {
-  const ProductTile( {super.key,required this.data,required this.index});
+  const ProductTile({super.key, required this.data, required this.index});
   final int index;
   final ProductDataModel data;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        controller.goToDetailsPage(index);
+        controller.goToDetailsPage(index: index);
       },
       child: Container(
         padding: EdgeInsets.only(right: 20.w),

@@ -20,7 +20,7 @@ class ProductController extends BaseController {
       required LocalService localService,
       required CartController cartController})
       : _productService = productService,
-      _localService =localService,
+        _localService = localService,
         _cartController = cartController;
 
   // initially contains all the product, if any filter is applied it changes, if no filter are applied then contains all the products
@@ -29,7 +29,8 @@ class ProductController extends BaseController {
   // array that contains all the products, this array is untouched
   List<ProductDataModel> _allProducts = <ProductDataModel>[];
 
-  ProductDataModel? productDetail; // selected product to view in detail
+  Rxn<ProductDataModel> productDetail =
+      Rxn(); // selected product to view in detail
 
   RxInt productCartCount = 1.obs; // detail view product cart count
 
@@ -47,7 +48,7 @@ class ProductController extends BaseController {
   RxBool showSearchClearButton = false.obs;
 
   // User name for better UI
-  RxString userName ="".obs;
+  RxString userName = "".obs;
 
   @override
   void onInit() async {
@@ -65,7 +66,6 @@ class ProductController extends BaseController {
     super.onInit();
   }
 
-
   // API Calls
   Future<void> fetchProducts() async {
     setLoading();
@@ -82,25 +82,39 @@ class ProductController extends BaseController {
   Future<void> fetchCategoryProducts(String category) async {
     similarProducts.value =
         await _productService.fetchCategoryProducts(category);
-    similarProducts.removeWhere((item) => item.id == productDetail?.id);
+    similarProducts.removeWhere((item) => item.id == productDetail.value?.id);
   }
 
   // Navigating function
-  void goToDetailsPage(int index) async {
+  void goToDetailsPage({
+    required int index,
+  }) async {
     // clear similar products
     similarProducts.value.clear();
     // set product to product details
-    productDetail = filteredProducts[index];
+    productDetail.value = filteredProducts[index];
+
     // fetch similar products
     fetchCategoryProducts(
-      productDetail?.category ?? "",
+      productDetail.value?.category ?? "",
     );
     // remove prodyct
 
     // reset cart count
     productCartCount.value =
-        _cartController.getCountOfProduct(productDetail?.id);
+        _cartController.getCountOfProduct(productDetail.value?.id);
     Get.toNamed(RouteNames.productDetailPage);
+  }
+
+  // switchDetailProduct() used to switch the product in detail view with one of the similar product
+  void switchDetailProduct(ProductDataModel product) {
+    similarProducts.clear();
+    productDetail.value = product;
+    fetchCategoryProducts(
+      productDetail.value?.category ?? "",
+    );
+    productCartCount.value =
+        _cartController.getCountOfProduct(productDetail.value?.id);
   }
 
   // Product Filter methods
@@ -110,38 +124,34 @@ class ProductController extends BaseController {
       return;
     }
     setLoading();
-
     filteredProducts.value = await _productService
         .fetchCategoryProducts(selectedCategoryFilter.value!);
+    _searchProduct();
     stopLoading();
   }
 
   Future<void> _searchProduct() async {
     setLoading();
-    // if category is selcted for fitler, then search product in that specific category
-    if (selectedCategoryFilter.value != null) {
-      filteredProducts.value = _allProducts
-          .where(
-            (element) =>
-                (element.title?.toLowerCase() ?? "")
-                    .contains(searchController.text.toLowerCase()) &&
-                element.category == selectedCategoryFilter.value,
-          )
-          .toList();
-    } else {
-      // if category is not selected
-      filteredProducts.value = _allProducts
-          .where((element) => (element.title?.toLowerCase() ?? "")
-              .contains(searchController.text.toLowerCase()))
-          .toList();
-    }
+    filteredProducts.value = _allProducts.where((element) {
+      if (selectedCategoryFilter.value == null) {
+        return (element.title?.toLowerCase() ?? "")
+            .contains(searchController.text.toLowerCase());
+      }
+      return (element.title?.toLowerCase() ?? "")
+              .contains(searchController.text.toLowerCase()) &&
+          element.category == selectedCategoryFilter.value;
+    }).toList();
     stopLoading();
   }
 
   void setCategoryFilter(String cat) {
     if (selectedCategoryFilter.value == cat) {
       selectedCategoryFilter.value = null;
-      filteredProducts.value = _allProducts;
+      if (searchController.text.isEmpty) {
+        filteredProducts.value = _allProducts;
+      } else {
+        _searchProduct();
+      }
     } else {
       selectedCategoryFilter.value = cat;
       _filterProductByCategory();
@@ -149,20 +159,23 @@ class ProductController extends BaseController {
   }
 
   // Get user name
-  Future<void> getUserName()async{
-    userName.value = await _localService.getData("username")??"";
-    if(userName.isEmpty){
+  Future<void> getUserName() async {
+    userName.value = await _localService.getData("username") ?? "";
+    if (userName.isEmpty) {
       // show dialog to take user name
-      await Get.dialog( AlertDialog(
+      await Get.dialog(AlertDialog(
         backgroundColor: AppColors.tileBlack,
         title: const AppTextWidget(
           txtTitle: "What should we call you?",
           fontSize: 16,
         ),
-        content: AppTextFormField(hintText: "Your good name please",onChanged: (val){
-          userName.value = val;
-        },),
-      )).whenComplete(()async{
+        content: AppTextFormField(
+          hintText: "Your good name please",
+          onChanged: (val) {
+            userName.value = val;
+          },
+        ),
+      )).whenComplete(() async {
         await _localService.storeData("username", userName.value);
       });
     }
