@@ -17,15 +17,16 @@ A demo projet to showcase my Flutter skills
 ## Features
 
 1. **Product Listing:**
-   - Filter by category (mention filtering options)
+   - Filter by category
    - Search by product name
    - Data from fakestoreapi.com
 2. Product Detail Page
 3. User Cart Management:
    - Note: Cart data stored in local storage (mention limitation)
 4. Order Checkout
-5. Offline Support (briefly describe functionality)
-6. Minimal Animations (mention animation types, if relevant)
+5. Offline Support
+   - Once data is fetch from server, it is cached in local and is retrieved from there afterwards
+6. Minimal Animations like image loading, loader, lottie files and while navigating
 
 ## Technologies Used
 
