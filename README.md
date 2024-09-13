@@ -1,16 +1,43 @@
-# ecomerce_test
+## Ecommerce Test Project - A Flutter App
 
-A new Flutter project.
+A demo projet to showcase my Flutter skills
 
-## Getting Started
+## Prerequisites
 
-This project is a starting point for a Flutter application.
+- Flutter v3.24.3 (https://flutter.dev/docs/get-started/install)
+- Dart v3.5.3 (https://dart.dev/get-started/install)
 
-A few resources to get you started if this is your first Flutter project:
+## Running the Project
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Install Flutter and Dart (if necessary).
+2. Clone the repository or download the project.
+3. Run `flutter pub get` in the project directory to install dependencies.
+4. Start the app using `flutter run`.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Features
+
+1. **Product Listing:**
+   - Filter by category (mention filtering options)
+   - Search by product name
+   - Data from fakestoreapi.com
+2. Product Detail Page
+3. User Cart Management:
+   - Note: Cart data stored in local storage (mention limitation)
+4. Order Checkout
+5. Offline Support (briefly describe functionality)
+6. Minimal Animations (mention animation types, if relevant)
+
+## Technologies Used
+
+- Flutter v3.24.3
+- Dart v3.5.3
+- GetX v5.0.0-release-candidate-9.2 (https://pub.dev/packages/get)
+- Dio v5.7.0 (https://pub.dev/packages/dio)
+
+## Author(s)
+
+- Mustafa Sidhpuri
+
+## Contact
+
+- For any questions or feedback, please reach out to mustafasidhpuri13@gmail.com
