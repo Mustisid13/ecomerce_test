@@ -1,11 +1,12 @@
 ## Ecommerce Test Project - A Flutter App
 
-A demo projet to showcase my Flutter skills
+Demonstrating Flutter Proficiency <br>
+Download apk from [here](https://drive.google.com/file/d/17tKFHwSmoJs-JV_AYriCo89JFFFaC_c7/view?usp=sharing)
 
 ## Prerequisites
 
-- Flutter v3.24.3 (https://flutter.dev/docs/get-started/install)
-- Dart v3.5.3 (https://dart.dev/get-started/install)
+- [Flutter v3.24.3](https://flutter.dev/docs/get-started/install)
+- [Dart v3.5.3](https://dart.dev/get-started/install)
 
 ## Running the Project
 
@@ -25,15 +26,15 @@ A demo projet to showcase my Flutter skills
    - Note: Cart data stored in local storage (mention limitation)
 4. Order Checkout
 5. Offline Support
-   - Once data is fetch from server, it is cached in local and is retrieved from there afterwards
-6. Minimal Animations like image loading, loader, lottie files and while navigating
+   - Seamlessly access content even without an internet connection. Data is cached locally upon initial fetch, ensuring availability offline.
+6. Enjoy a more engaging and visually appealing experience with animations for image loading, progress indicators (loaders), Lottie animations, and smooth navigation transitions.
 
 ## Technologies Used
 
-- Flutter v3.24.3
-- Dart v3.5.3
-- GetX v5.0.0-release-candidate-9.2 (https://pub.dev/packages/get)
-- Dio v5.7.0 (https://pub.dev/packages/dio)
+- [Flutter v3.24.3](https://flutter.dev/docs/get-started/install)
+- [Dart v3.5.3](https://dart.dev/get-started/install)
+- [GetX v5.0.0-release-candidate-9.2](https://pub.dev/packages/get)
+- [Dio v5.7.0](https://pub.dev/packages/dio)
 
 ## Author(s)
 
